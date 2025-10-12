@@ -35,6 +35,7 @@ h1 {
     margin-bottom: 2vw;
     font-size: clamp(4rem, 8vw, 8rem);
     line-height: clamp(4rem, 8vw, 8rem);
+    letter-spacing: -0.05em;
 }
 
 h2 {
