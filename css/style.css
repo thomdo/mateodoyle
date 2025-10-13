@@ -45,6 +45,21 @@ h2 {
     margin: 0px;
 }
 
-img {
+.thumbnail {
+    background-color: #F6F6F6;
+    overflow: hidden;
+    position: relative;
+}
+
+.thumbnail-image {
     width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.4s cubic-bezier(0.2, 0, 0   , 1);
+    transform-origin: center center;
+
+}
+
+.thumbnail:hover .thumbnail-image {
+    transform: scale(1.1);
 }
