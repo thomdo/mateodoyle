@@ -47,6 +47,7 @@ h2 {
 
 .thumbnail {
     background-color: #F6F6F6;
+    aspect-ratio: 1 / 1;
     overflow: hidden;
     position: relative;
 }
