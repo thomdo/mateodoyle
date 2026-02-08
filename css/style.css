@@ -23,7 +23,7 @@ footer {
     box-sizing: border-box;
 }
 
-main {
+.grid {
     width: clamp(320px, 100%, 1920px);
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -31,7 +31,7 @@ main {
 }
 
 @media screen and (max-width: 600px) {
-    main {
+    .grid {
         grid-template-columns: 1fr 1fr;
     }
 }

@@ -1,0 +1,56 @@
+[
+    {
+        "id": "21-ford-bronco-gray",
+        "name": "21 Ford Bronco",
+        "color": "Gray",
+        "image": "assets/21-ford-bronco-gray.webp"
+    },
+    {
+        "id": "67-austin-mini-van-teal",
+        "name": "67 Austin Mini Van",
+        "color": "Teal",
+        "image": "assets/67-austin-mini-van-teal.webp"
+    },
+    {
+        "id": "baja-bone-shaker-red",
+        "name": "Baja Bone Shaker",
+        "color": "Red",
+        "image": "assets/baja-bone-shaker-red.webp"
+    },
+    {
+        "id": "baja-truck-blue",
+        "name": "Baja Truck",
+        "color": "Blue",
+        "image": "assets/baja-truck-blue.webp"
+    },
+    {
+        "id": "car-de-asada",
+        "name": "Car De Asada",
+        "color": "Green",
+        "image": "assets/car-de-asada.webp"
+    },
+    {
+        "id": "flame-flyer-bowser-junior",
+        "name": "Flame Flyer Bowser Junior",
+        "color": "Red",
+        "image": "assets/flame-flyer-bowser-junior.webp"
+    },
+    {
+        "id": "hudson-hornet-orange",
+        "name": "Hudson Hornet",
+        "color": "Orange",
+        "image": "assets/hudson-hornet-orange.webp"
+    },
+    {
+        "id": "lamborghini-huracan-lp-610-4-silver",
+        "name": "Lamborghini Huracan LP 610-4",
+        "color": "Silver",
+        "image": "assets/lamborghini-huracan-lp-610-4-silver.webp"
+    },
+    {
+        "id": "rodger-dodger-white",
+        "name": "Rodger Dodger",
+        "color": "White",
+        "image": "assets/rodger-dodger-white.webp"
+    }
+]
