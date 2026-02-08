@@ -59,6 +59,7 @@ h2 {
     aspect-ratio: 1 / 1;
     overflow: hidden;
     position: relative;
+    min-width: 0;
 }
 
 .thumbnail-image {
