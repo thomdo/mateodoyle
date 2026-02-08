@@ -52,5 +52,17 @@
         "name": "Rodger Dodger",
         "color": "White",
         "image": "assets/rodger-dodger-white.webp"
+    },
+    {
+        "id": "lindster-prototype-glow-in-dark",
+        "name": "Lindster Prototype",
+        "color": "Glow in the Dark",
+        "image": "assets/lindster-prototype-glow-in-dark.webp"
+    },
+    {
+        "id": "vanster",
+        "name": "Vanster",
+        "color": "Blue",
+        "image": "assets/vanster.webp"
     }
 ]
