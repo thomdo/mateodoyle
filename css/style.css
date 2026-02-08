@@ -23,11 +23,16 @@ footer {
     box-sizing: border-box;
 }
 
+main {
+    width: 100%;
+    box-sizing: border-box;
+}
+
 .grid {
     max-width: 1920px;
     width: 100%;
-    display: grid;
     margin: 0 auto;
+    display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 4px;
 }
