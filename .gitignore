@@ -1,0 +1,9 @@
+# --- System Files ---
+.DS_Store             # Mac OS clutter
+Thumbs.db             # Windows clutter
+
+# --- Raw Assets ---
+/_raw/                # Your Photoshop files, research notes, and huge photos
+*.psd                 # Just in case one slips into another folder
+*.tiff
+*.ai
