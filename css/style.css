@@ -68,6 +68,8 @@ h2 {
 
 }
 
-.thumbnail:hover .thumbnail-image {
-    transform: scale(1.1);
+@media (hover: hover) {
+    .thumbnail:hover .thumbnail-image {
+        transform: scale(1.1);
+    }
 }
