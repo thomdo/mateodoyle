@@ -1,8 +1,3 @@
-# --- System Files ---
-.DS_Store             # Mac OS clutter
-
-# --- Raw Assets ---
-/_raw/                # Your Photoshop files, research notes, and huge photos
-*.psd                 # Just in case one slips into another folder
-*.tiff
-*.ai  
+_raw/
+.DS_Store
+**/ .DS_Store
