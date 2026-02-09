@@ -6,6 +6,12 @@
         "image": "assets/21-ford-bronco-gray.webp"
     },
     {
+        "id": "polestar-trx",
+        "name": "Polestar TRX",
+        "color": "Yellow",
+        "image": "assets/polestar-trx.webp"
+    },
+    {
         "id": "67-austin-mini-van-teal",
         "name": "67 Austin Mini Van",
         "color": "Teal",

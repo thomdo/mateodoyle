@@ -53,6 +53,7 @@ h1 {
     font-size: clamp(4rem, 8vw, 8rem);
     line-height: clamp(4rem, 8vw, 8rem);
     letter-spacing: -0.05em;
+    text-align: center;
 }
 
 h2 {
