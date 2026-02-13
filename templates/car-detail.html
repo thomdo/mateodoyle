@@ -8,18 +8,16 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
-    <header>
-        <h1>Mateo’s<br>Garage</h1>
-        <h2>A Digital Hot Wheels Museum</h2>
-    </header>
-
+<body class="detail-page">
+    <a href="index.html" class="back-link">← Back to Garage</a>
     <main>
-        <a href="index.html" class="back-link">← Back to Garage</a>
         <div id="car-content" class="car-detail">
-            <h1 id="car-name">{{name}}</h1>
-            <p class="car-color">{{color}}</p>
-            <img id="car-image" src="{{image}}" alt="{{name}}">
+            <div class="car-info">
+                <h1 id="car-name">{{name}}</h1>
+                <p class="car-color">{{color}}</p>
+            </div>
+            <img id="car-image" src="{{image}}" alt="{{name}}"
+                style="view-transition-name: car-{{id}}; view-transition-class: car-morph">
         </div>
     </main>
 

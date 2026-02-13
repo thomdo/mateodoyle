@@ -29,7 +29,7 @@ const detailTemplate = fs.readFileSync(path.join(TEMPLATES_DIR, 'car-detail.html
 console.log('Generating index.html...');
 const carsListHtml = cars.map(car => `
     <a href="${car.id}.html" class="thumbnail">
-        <img src="${car.image}" alt="${car.name}" class="thumbnail-image" width="1" height="1" loading="lazy">
+        <img src="${car.image}" alt="${car.name}" class="thumbnail-image" width="1" height="1" loading="lazy" style="view-transition-name: car-${car.id}; view-transition-class: car-morph">
     </a>
 `).join('');
 
@@ -42,7 +42,8 @@ cars.forEach(car => {
     let carHtml = detailTemplate
         .replace(/{{name}}/g, car.name)
         .replace(/{{color}}/g, car.color)
-        .replace(/{{image}}/g, car.image);
+        .replace(/{{image}}/g, car.image)
+        .replace(/{{id}}/g, car.id);
 
     fs.writeFileSync(path.join(DIST_DIR, `${car.id}.html`), carHtml);
 });
