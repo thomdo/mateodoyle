@@ -29,7 +29,7 @@ const detailTemplate = fs.readFileSync(path.join(TEMPLATES_DIR, 'car-detail.html
 console.log('Generating index.html...');
 const carsListHtml = cars.map(car => `
     <a href="${car.id}.html" class="thumbnail">
-        <img src="${car.image}" alt="${car.name}" class="thumbnail-image" width="1" height="1" loading="lazy" style="view-transition-name: car-${car.id}; view-transition-class: car-morph">
+        <img src="${car.image}" alt="${car.name}" class="thumbnail-image" width="1" height="1" loading="lazy">
     </a>
 `).join('');
 

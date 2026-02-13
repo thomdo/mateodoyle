@@ -16,8 +16,7 @@
                 <h1 id="car-name">{{name}}</h1>
                 <p class="car-color">{{color}}</p>
             </div>
-            <img id="car-image" src="{{image}}" alt="{{name}}"
-                style="view-transition-name: car-{{id}}; view-transition-class: car-morph">
+            <img id="car-image" src="{{image}}" alt="{{name}}">
         </div>
     </main>
 
@@ -32,14 +31,17 @@
     <script>
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
+                e.preventDefault();
                 const backLink = document.querySelector('.back-link');
                 if (backLink) backLink.click();
             }
             if (e.key === 'ArrowLeft') {
+                e.preventDefault();
                 const prevLink = document.getElementById('prev-link');
                 if (prevLink) prevLink.click();
             }
             if (e.key === 'ArrowRight') {
+                e.preventDefault();
                 const nextLink = document.getElementById('next-link');
                 if (nextLink) nextLink.click();
             }
