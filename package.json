@@ -1,0 +1,12 @@
+{
+    "name": "mateos-garage",
+    "version": "1.0.0",
+    "description": "A static site for Mateo's Hot Wheels collection",
+    "scripts": {
+        "build": "node build.js",
+        "clean": "rm -rf dist"
+    },
+    "keywords": [],
+    "author": "Mateo Doyle",
+    "license": "ISC"
+}

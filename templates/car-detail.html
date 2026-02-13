@@ -4,9 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mateo's Garage</title>
+    <title>{{name}} | Mateo's Garage</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="script.js" defer></script>
 </head>
 
 <body>
@@ -16,7 +15,11 @@
     </header>
 
     <main>
-        <div id="garage-grid" class="grid">
+        <a href="index.html" class="back-link">← Back to Garage</a>
+        <div id="car-content" class="car-detail">
+            <h1 id="car-name">{{name}}</h1>
+            <p class="car-color">{{color}}</p>
+            <img id="car-image" src="{{image}}" alt="{{name}}">
         </div>
     </main>
 
