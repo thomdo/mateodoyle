@@ -156,3 +156,54 @@ h2 {
     color: #666;
     margin: 0;
 }
+
+@media screen and (max-width: 768px) {
+    .detail-page {
+        height: auto;
+        overflow-y: auto;
+    }
+
+    .detail-page main {
+        height: auto;
+    }
+
+    .car-detail {
+        display: flex;
+        flex-direction: column-reverse;
+        padding: 0;
+        gap: 0;
+        height: auto;
+    }
+
+    .car-info {
+        padding: 2rem;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+        background-color: #f5f5f5;
+    }
+
+    .detail-page h1 {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .detail-page .car-color {
+        font-size: 1.2rem;
+    }
+
+    #car-image {
+        width: 100%;
+        max-height: none;
+        aspect-ratio: 1 / 1;
+        object-fit: contain;
+        margin-top: 0;
+    }
+
+    .back-link {
+        padding: 0.5rem;
+        border-radius: 4px;
+        backdrop-filter: blur(4px);
+    }
+}
