@@ -9,7 +9,7 @@
 </head>
 
 <body class="detail-page">
-    <a href="index.html" class="back-link">← Back to Garage</a>
+    <a href="index.html#{{id}}" class="back-link">← Back to Garage</a>
     <main>
         <div id="car-content" class="car-detail">
             <div class="car-info">
@@ -32,18 +32,17 @@
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 e.preventDefault();
-                const backLink = document.querySelector('.back-link');
-                if (backLink) backLink.click();
+                window.location.href = 'index.html#{{id}}';
             }
             if (e.key === 'ArrowLeft') {
                 e.preventDefault();
                 const prevLink = document.getElementById('prev-link');
-                if (prevLink) prevLink.click();
+                if (prevLink) window.location.replace(prevLink.href);
             }
             if (e.key === 'ArrowRight') {
                 e.preventDefault();
                 const nextLink = document.getElementById('next-link');
-                if (nextLink) nextLink.click();
+                if (nextLink) window.location.replace(nextLink.href);
             }
         });
     </script>

@@ -28,7 +28,7 @@ const detailTemplate = fs.readFileSync(path.join(TEMPLATES_DIR, 'car-detail.html
 // Generate Index Page
 console.log('Generating index.html...');
 const carsListHtml = cars.map(car => `
-    <a href="${car.id}.html" class="thumbnail">
+    <a href="${car.id}.html" class="thumbnail" id="${car.id}">
         <img src="${car.image}" alt="${car.name}" class="thumbnail-image" width="1" height="1" loading="lazy">
     </a>
 `).join('');

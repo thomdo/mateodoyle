@@ -32,6 +32,23 @@
     <footer>
         <p>&copy; 2026 Mateo Doyle · United States</p>
     </footer>
+
+    <script>
+        window.addEventListener('load', () => {
+            if (window.location.hash) {
+                const targetId = window.location.hash.substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ block: 'center' });
+                    // Remove focus state
+                    targetElement.blur();
+                    // Also prevent default focus behavior if possible by temporarily removing/restoring tabindex or similar, 
+                    // but blur() is usually sufficient for visual focus ring.
+                    // If the browser forces focus because of hash, we might need a small timeout.
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>
