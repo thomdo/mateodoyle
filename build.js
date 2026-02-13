@@ -38,12 +38,20 @@ fs.writeFileSync(path.join(DIST_DIR, 'index.html'), indexHtml);
 
 // Generate Detail Pages
 console.log('Generating detail pages...');
-cars.forEach(car => {
+cars.forEach((car, index) => {
+    // Calculate previous and next car IDs (circular)
+    const prevIndex = (index - 1 + cars.length) % cars.length;
+    const nextIndex = (index + 1) % cars.length;
+    const prevId = cars[prevIndex].id;
+    const nextId = cars[nextIndex].id;
+
     let carHtml = detailTemplate
         .replace(/{{name}}/g, car.name)
         .replace(/{{color}}/g, car.color)
         .replace(/{{image}}/g, car.image)
-        .replace(/{{id}}/g, car.id);
+        .replace(/{{id}}/g, car.id)
+        .replace(/{{prevId}}/g, prevId)
+        .replace(/{{nextId}}/g, nextId);
 
     fs.writeFileSync(path.join(DIST_DIR, `${car.id}.html`), carHtml);
 });

@@ -24,6 +24,27 @@
     <footer>
         <p>&copy; 2026 Mateo Doyle · United States</p>
     </footer>
+
+    <!-- Keyboard Navigation -->
+    <a href="{{prevId}}.html" id="prev-link" hidden></a>
+    <a href="{{nextId}}.html" id="next-link" hidden></a>
+
+    <script>
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const backLink = document.querySelector('.back-link');
+                if (backLink) backLink.click();
+            }
+            if (e.key === 'ArrowLeft') {
+                const prevLink = document.getElementById('prev-link');
+                if (prevLink) prevLink.click();
+            }
+            if (e.key === 'ArrowRight') {
+                const nextLink = document.getElementById('next-link');
+                if (nextLink) nextLink.click();
+            }
+        });
+    </script>
 </body>
 
 </html>
