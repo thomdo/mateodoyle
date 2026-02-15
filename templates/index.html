@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body class="fade-content">
     <header>
         <h1>Mateo’s<br>Garage</h1>
         <h2>A Digital Hot Wheels Museum</h2>
@@ -45,11 +45,10 @@
                     targetElement.scrollIntoView({ block: 'center' });
                     // Remove focus state
                     targetElement.blur();
-                    // Also prevent default focus behavior if possible by temporarily removing/restoring tabindex or similar, 
-                    // but blur() is usually sufficient for visual focus ring.
-                    // If the browser forces focus because of hash, we might need a small timeout.
                 }
             }
+            // Trigger fade in
+            document.body.classList.add('loaded');
         });
     </script>
 </body>

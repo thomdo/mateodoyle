@@ -50,6 +50,7 @@ cars.forEach((car, index) => {
         .replace(/{{color}}/g, car.color)
         .replace(/{{image}}/g, car.image)
         .replace(/{{id}}/g, car.id)
+        .replace(/{{toyNumber}}/g, car.toyNumber)
         .replace(/{{prevId}}/g, prevId)
         .replace(/{{nextId}}/g, nextId);
 
