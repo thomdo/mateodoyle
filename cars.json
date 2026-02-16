@@ -1,108 +1,10 @@
 [
     {
-        "id": "21-ford-bronco-gray",
-        "name": "21 Ford Bronco",
-        "color": "Gray",
-        "image": "assets/21-ford-bronco-gray.webp",
-        "toyNumber": "HCT70"
-    },
-    {
-        "id": "polestar-trx",
-        "name": "Polestar TRX",
-        "color": "Yellow",
-        "image": "assets/polestar-trx.webp",
-        "toyNumber": "HYW29"
-    },
-    {
-        "id": "67-austin-mini-van-teal",
-        "name": "67 Austin Mini Van",
-        "color": "Teal",
-        "image": "assets/67-austin-mini-van-teal.webp",
-        "toyNumber": "JBB68"
-    },
-    {
         "id": "baja-bone-shaker-red",
         "name": "Baja Bone Shaker",
         "color": "Red",
         "image": "assets/baja-bone-shaker-red.webp",
         "toyNumber": "HCV09"
-    },
-    {
-        "id": "baja-truck-blue",
-        "name": "Baja Truck",
-        "color": "Blue",
-        "image": "assets/baja-truck-blue.webp",
-        "toyNumber": "HTC09"
-    },
-    {
-        "id": "car-de-asada",
-        "name": "Car De Asada",
-        "color": "Green",
-        "image": "assets/car-de-asada.webp",
-        "toyNumber": "HCW72"
-    },
-    {
-        "id": "flame-flyer-bowser-junior",
-        "name": "Flame Flyer Bowser Junior",
-        "color": "Red",
-        "image": "assets/flame-flyer-bowser-junior.webp",
-        "toyNumber": "HDB27"
-    },
-    {
-        "id": "hudson-hornet-orange",
-        "name": "Hudson Hornet",
-        "color": "Orange",
-        "image": "assets/hudson-hornet-orange.webp",
-        "toyNumber": "HPV78"
-    },
-    {
-        "id": "lamborghini-huracan-lp-610-4-silver",
-        "name": "Lamborghini Huracan LP 610-4",
-        "color": "Silver",
-        "image": "assets/lamborghini-huracan-lp-610-4-silver.webp",
-        "toyNumber": "CFH19"
-    },
-    {
-        "id": "rodger-dodger-white",
-        "name": "Rodger Dodger",
-        "color": "White",
-        "image": "assets/rodger-dodger-white.webp",
-        "toyNumber": "HTX12"
-    },
-    {
-        "id": "lindster-prototype-glow-in-dark",
-        "name": "Lindster Prototype",
-        "color": "Glow in the Dark",
-        "image": "assets/lindster-prototype-glow-in-dark.webp",
-        "toyNumber": "GRY16"
-    },
-    {
-        "id": "vanster",
-        "name": "Vanster",
-        "color": "Blue",
-        "image": "assets/vanster.webp",
-        "toyNumber": "HYY87"
-    },
-    {
-        "id": "aint-fare-green",
-        "name": "Ain't Fare",
-        "color": "Green",
-        "image": "assets/aint-fare-green.webp",
-        "toyNumber": "JBB67"
-    },
-    {
-        "id": "chevy-blazer-4x4-white",
-        "name": "Chevy Blazer 4x4",
-        "color": "White",
-        "image": "assets/chevy-blazer-4x4-white.webp",
-        "toyNumber": "HYX25"
-    },
-    {
-        "id": "fig-rig-pink",
-        "name": "Fig Rig",
-        "color": "Pink",
-        "image": "assets/fig-rig-pink.webp",
-        "toyNumber": "HNB26"
     },
     {
         "id": "speed-bump-red",
@@ -112,11 +14,18 @@
         "toyNumber": "HTB78"
     },
     {
-        "id": "super-twin-mill-green",
-        "name": "Super Twin Mill",
-        "color": "Green",
-        "image": "assets/super-twin-mill-green.webp",
-        "toyNumber": "HYW12"
+        "id": "hudson-hornet-orange",
+        "name": "Hudson Hornet",
+        "color": "Orange",
+        "image": "assets/hudson-hornet-orange.webp",
+        "toyNumber": "HPV78"
+    },
+    {
+        "id": "polestar-trx",
+        "name": "Polestar TRX",
+        "color": "Yellow",
+        "image": "assets/polestar-trx.webp",
+        "toyNumber": "HYW29"
     },
     {
         "id": "total-disposal-yellow",
@@ -124,5 +33,96 @@
         "color": "Yellow",
         "image": "assets/total-disposal-yellow.webp",
         "toyNumber": "HTB68"
+    },
+    {
+        "id": "car-de-asada",
+        "name": "Car De Asada",
+        "color": "Green",
+        "image": "assets/car-de-asada.webp",
+        "toyNumber": "HCW72"
+    },
+    {
+        "id": "aint-fare-green",
+        "name": "Ain't Fare",
+        "color": "Green",
+        "image": "assets/aint-fare-green.webp",
+        "toyNumber": "JBB67"
+    },
+    {
+        "id": "super-twin-mill-green",
+        "name": "Super Twin Mill",
+        "color": "Green",
+        "image": "assets/super-twin-mill-green.webp",
+        "toyNumber": "HYW12"
+    },
+    {
+        "id": "flame-flyer-bowser-junior",
+        "name": "Flame Flyer Bowser Junior",
+        "color": "Green",
+        "image": "assets/flame-flyer-bowser-junior.webp",
+        "toyNumber": "HDB27"
+    },
+    {
+        "id": "67-austin-mini-van-teal",
+        "name": "67 Austin Mini Van",
+        "color": "Teal",
+        "image": "assets/67-austin-mini-van-teal.webp",
+        "toyNumber": "JBB68"
+    },
+    {
+        "id": "baja-truck-blue",
+        "name": "Baja Truck",
+        "color": "Blue",
+        "image": "assets/baja-truck-blue.webp",
+        "toyNumber": "HTC09"
+    },
+    {
+        "id": "vanster",
+        "name": "Vanster",
+        "color": "Blue",
+        "image": "assets/vanster.webp",
+        "toyNumber": "HYY87"
+    },
+    {
+        "id": "fig-rig-pink",
+        "name": "Fig Rig",
+        "color": "Pink",
+        "image": "assets/fig-rig-pink.webp",
+        "toyNumber": "HNB26"
+    },
+    {
+        "id": "rodger-dodger-white",
+        "name": "Rodger Dodger",
+        "color": "White",
+        "image": "assets/rodger-dodger-white.webp",
+        "toyNumber": "HTX12"
+    },
+    {
+        "id": "chevy-blazer-4x4-white",
+        "name": "Chevy Blazer 4x4",
+        "color": "White",
+        "image": "assets/chevy-blazer-4x4-white.webp",
+        "toyNumber": "HYX25"
+    },
+    {
+        "id": "21-ford-bronco-gray",
+        "name": "21 Ford Bronco",
+        "color": "Gray",
+        "image": "assets/21-ford-bronco-gray.webp",
+        "toyNumber": "HCT70"
+    },
+    {
+        "id": "lamborghini-huracan-lp-610-4-silver",
+        "name": "Lamborghini Huracan LP 610-4",
+        "color": "Silver",
+        "image": "assets/lamborghini-huracan-lp-610-4-silver.webp",
+        "toyNumber": "CFH19"
+    },
+    {
+        "id": "lindster-prototype-glow-in-dark",
+        "name": "Lindster Prototype",
+        "color": "Glow in the Dark",
+        "image": "assets/lindster-prototype-glow-in-dark.webp",
+        "toyNumber": "GRY16"
     }
 ]
