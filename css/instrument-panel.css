@@ -493,19 +493,21 @@
 @media screen and (max-width: 500px) {
     .dashboard {
         width: 115vw;
-        /* Extra wide buffer for x-axis shake */
+        /* Extra wide buffer */
         flex-shrink: 0;
-        /* Force width > 100% */
-        margin-left: -7.5vw;
-        /* Manually center (115-100)/2 */
+        margin-left: 0;
+        /* Let flexbox center it naturally */
         border-radius: 0;
         border-left: none;
         border-right: none;
         gap: 2rem;
 
-        /* Deep skirt for y-axis shake */
-        padding: 0 1rem 100px 1rem;
-        margin-bottom: -80px;
+        /* Deep skirt */
+        height: auto;
+        /* Allow expansion */
+        padding: 10px 1rem 80px 1rem;
+        /* Add top padding, keep bottom skirt */
+        margin-bottom: -60px;
     }
 
     .instrument-group.main-gauge {
