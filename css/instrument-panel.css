@@ -492,18 +492,20 @@
 /* Responsive */
 @media screen and (max-width: 500px) {
     .dashboard {
-        width: 100vw;
-        /* Force full viewport width */
-        margin: 0;
-        /* Remove any centering margins */
-        left: 0;
-        /* Ensure left alignment */
+        width: 115vw;
+        /* Extra wide buffer for x-axis shake */
+        flex-shrink: 0;
+        /* Force width > 100% */
+        margin-left: -7.5vw;
+        /* Manually center (115-100)/2 */
         border-radius: 0;
-        /* Remove rounded corners */
         border-left: none;
         border-right: none;
         gap: 2rem;
-        padding: 0 1rem;
+
+        /* Deep skirt for y-axis shake */
+        padding: 0 1rem 100px 1rem;
+        margin-bottom: -80px;
     }
 
     .instrument-group.main-gauge {
