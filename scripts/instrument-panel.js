@@ -78,7 +78,10 @@ class InstrumentPanel {
                 <!-- Hazards -->
                 <div class="instrument-group">
                     <button id="hazard-switch" class="dash-btn instrument-bezel" role="switch" aria-checked="false" aria-label="Hazards">
-                        <span class="hazard-icon">▲</span>
+                        <svg class="hazard-icon" viewBox="0 0 24 24">
+                            <path d="M12 3l-9 18h18L12 3z" />
+                            <path d="M12 9l-4.5 9h9L12 9z" />
+                        </svg>
                     </button>
                     <div class="label">HAZARD</div>
                 </div>
@@ -176,6 +179,8 @@ class InstrumentPanel {
             // Reset opacity
             this.elements.hazardOverlay.style.opacity = '';
             document.querySelectorAll('.hazard-light-left, .hazard-light-right').forEach(el => el.style.opacity = '');
+            const icon = this.elements.hazardSwitch.querySelector('.hazard-icon');
+            if (icon) icon.style.opacity = '';
         }
     }
 
@@ -198,6 +203,10 @@ class InstrumentPanel {
         // Apply directly to the light elements
         const lights = document.querySelectorAll('.hazard-light-left, .hazard-light-right');
         lights.forEach(el => el.style.opacity = opacity);
+
+        // Sync the button icon as well
+        const icon = this.elements.hazardSwitch.querySelector('.hazard-icon');
+        if (icon) icon.style.opacity = isLightOn ? 1 : 0.3;
 
         this.state.hazardLoopLoc = requestAnimationFrame(() => this.syncHazards());
     }
