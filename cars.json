@@ -82,5 +82,47 @@
         "color": "Blue",
         "image": "assets/vanster.webp",
         "toyNumber": "HYY87"
+    },
+    {
+        "id": "aint-fare-green",
+        "name": "Ain't Fare",
+        "color": "Green",
+        "image": "assets/aint-fare-green.webp",
+        "toyNumber": "JBB67"
+    },
+    {
+        "id": "chevy-blazer-4x4-white",
+        "name": "Chevy Blazer 4x4",
+        "color": "White",
+        "image": "assets/chevy-blazer-4x4-white.webp",
+        "toyNumber": "HYX25"
+    },
+    {
+        "id": "fig-rig-pink",
+        "name": "Fig Rig",
+        "color": "Pink",
+        "image": "assets/fig-rig-pink.webp",
+        "toyNumber": "HNB26"
+    },
+    {
+        "id": "speed-bump-red",
+        "name": "Speed Bump",
+        "color": "Red",
+        "image": "assets/speed-bump-red.webp",
+        "toyNumber": "HTB78"
+    },
+    {
+        "id": "super-twin-mill-green",
+        "name": "Super Twin Mill",
+        "color": "Green",
+        "image": "assets/super-twin-mill-green.webp",
+        "toyNumber": "HYW12"
+    },
+    {
+        "id": "total-disposal-yellow",
+        "name": "Total Disposal",
+        "color": "Yellow",
+        "image": "assets/total-disposal-yellow.webp",
+        "toyNumber": "HTB68"
     }
 ]
