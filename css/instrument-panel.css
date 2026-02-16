@@ -1,0 +1,510 @@
+/* Instrument Panel Root Variables */
+:root {
+    --panel-height: 140px;
+    --panel-bg: #1a1a1a;
+    --panel-text: #fff;
+    --panel-accent: #ff4d4d;
+    --bezel-color: #333;
+    --bezel-border: #666;
+    --gauge-bg: #111;
+}
+
+/* Container */
+#instrument-panel-root {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+/* START BUTTON */
+.start-engine-btn {
+    pointer-events: auto;
+    background: linear-gradient(145deg, #d32f2f, #b71c1c);
+    color: white;
+    font-family: 'Bungee', sans-serif;
+    font-size: 1.5rem;
+    padding: 1rem 3rem;
+    border: 4px solid #fff;
+    border-radius: 50px;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    text-transform: uppercase;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: absolute;
+    bottom: 20px;
+    z-index: 100;
+}
+
+.start-engine-btn:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+}
+
+.start-engine-btn:active {
+    transform: scale(0.95);
+}
+
+.start-engine-btn.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.8) translateY(50px);
+}
+
+/* DASHBOARD CONTAINER */
+.dashboard {
+    pointer-events: auto;
+    width: min(95%, 600px);
+    height: var(--panel-height);
+    background: linear-gradient(to bottom, #2a2a2a, #0a0a0a);
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 0 2rem 40px 2rem;
+    /* Extra bottom padding for "skirt" */
+    margin-bottom: -30px;
+    /* Push skirt below viewport */
+    box-shadow:
+        0 -2px 0 rgba(255, 255, 255, 0.1),
+        0 0 30px rgba(0, 0, 0, 0.8);
+    position: relative;
+    transform: translateY(100%);
+    /* Start hidden below fold */
+    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid #444;
+    border-bottom: none;
+    /* No border on bottom since it bleeds off */
+}
+
+.dashboard.active {
+    transform: translateY(0);
+}
+
+/* Leather texture overlay */
+.dashboard::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='4' height='4' viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 3h1v1H1V3zm2-2h1v1H3V1z' fill='%23000000' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E");
+    opacity: 0.4;
+    pointer-events: none;
+    border-radius: 40px 40px 0 0;
+}
+
+/* INSTRUMENT GROUPS */
+.instrument-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    z-index: 2;
+    height: 100px;
+}
+
+.instrument-group.main-gauge {
+    height: 130px;
+    /* Taller for center gauge */
+    margin-bottom: 20px;
+    /* Pop up slightly */
+}
+
+.label {
+    font-family: 'Bungee', sans-serif;
+    font-size: 0.6rem;
+    color: #888;
+    margin-top: 8px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.8);
+    letter-spacing: 1px;
+}
+
+/* SHARED BEZEL STYLE */
+.instrument-bezel {
+    border-radius: 50%;
+    box-shadow:
+        inset 0 2px 4px rgba(255, 255, 255, 0.2),
+        /* Top highlight */
+        inset 0 -2px 4px rgba(0, 0, 0, 0.8),
+        /* Bottom shadow */
+        0 4px 8px rgba(0, 0, 0, 0.6),
+        /* Drop shadow */
+        0 0 0 2px #000,
+        /* Spacer */
+        0 0 0 4px #444,
+        /* Metal ring */
+        0 0 0 5px #111;
+    /* Outer edge */
+    background: #111;
+    position: relative;
+}
+
+/* BUTTONS */
+.dash-btn {
+    width: 60px;
+    height: 60px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    transition: all 0.1s;
+    background: radial-gradient(circle at 30% 30%, #444, #111);
+}
+
+.dash-btn:active {
+    transform: scale(0.95);
+    box-shadow: inset 0 5px 15px rgba(0, 0, 0, 0.9), 0 0 0 2px #000, 0 0 0 4px #444, 0 0 0 5px #111;
+}
+
+.dash-btn svg,
+.dash-btn .hazard-icon {
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.8));
+    transition: all 0.2s;
+}
+
+/* Horn specific */
+.horn-icon {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+}
+
+/* Hazard specific */
+.hazard-icon {
+    font-size: 1.5rem;
+    margin-top: -2px;
+}
+
+.dash-btn[aria-checked="true"] {
+    color: #ff3333;
+    text-shadow: 0 0 15px #ff0000;
+}
+
+.dash-btn[aria-checked="true"] .hazard-icon {
+    animation: pulse-light 0.8s infinite alternate;
+}
+
+@keyframes pulse-light {
+    from {
+        opacity: 0.6;
+    }
+
+    to {
+        opacity: 1;
+        text-shadow: 0 0 20px red;
+    }
+}
+
+/* SPEEDOMETER */
+.speedometer-dial {
+    width: 110px;
+    height: 110px;
+    background: radial-gradient(circle, #222 0%, #000 80%);
+    position: relative;
+    overflow: hidden;
+    /* Keep needle inside during transitions if needed, though we want it visible */
+    overflow: visible;
+}
+
+/* Ticks / Markings */
+.speedometer-ticks {
+    position: absolute;
+    inset: 4px;
+    border-radius: 50%;
+    /* 
+       0deg = Top
+       Start at 210deg (-150deg relative to top)
+       Fill 240deg total
+       Redline starts at ~180deg (75%)
+    */
+    background:
+        repeating-conic-gradient(from 210deg,
+            transparent 0deg,
+            transparent 2deg,
+            #555 2.5deg,
+            #555 4deg),
+        conic-gradient(from 210deg,
+            transparent 0deg,
+            transparent 180deg,
+            rgba(255, 0, 0, 0.4) 180deg,
+            rgba(255, 0, 0, 0.8) 300deg
+            /* Fade to solid red */
+        );
+    mask-image: radial-gradient(transparent 65%, black 66%);
+    -webkit-mask-image: radial-gradient(transparent 65%, black 66%);
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 85%);
+}
+
+/* Numbers */
+.speedometer-numbers {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.speedometer-numbers span {
+    position: absolute;
+    font-family: 'Bungee', sans-serif;
+    font-size: 0.7rem;
+    color: #888;
+}
+
+.speedometer-numbers span:nth-child(1) {
+    bottom: 20px;
+    left: 25px;
+}
+
+/* 0 */
+.speedometer-numbers span:nth-child(2) {
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* 5 */
+.speedometer-numbers span:nth-child(3) {
+    bottom: 20px;
+    right: 25px;
+}
+
+/* 10 */
+
+/* Needle */
+.speedometer-needle {
+    width: 4px;
+    height: 45px;
+    background: #ff3333;
+    position: absolute;
+    bottom: 50%;
+    left: calc(50% - 2px);
+    transform-origin: bottom center;
+    transform: rotate(-120deg);
+    transition: transform 0.1s cubic-bezier(0.2, 0, 0, 1);
+    /* Quick response */
+    z-index: 10;
+    border-radius: 2px 2px 0 0;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
+.speedometer-cap {
+    width: 14px;
+    height: 14px;
+    background: linear-gradient(135deg, #444, #111);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 11;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    border: 1px solid #333;
+}
+
+/* Animations */
+.shaking {
+    animation: shake 0.1s infinite;
+}
+
+.shaking-violent {
+    animation: shake-violent 0.05s infinite;
+    /* Faster, more intense */
+}
+
+@keyframes shake {
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+
+    10% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+    }
+
+    20% {
+        transform: translate(-3px, 0px) rotate(1deg);
+    }
+
+    30% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+
+    40% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+
+    60% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+
+    70% {
+        transform: translate(3px, 1px) rotate(-1deg);
+    }
+
+    80% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+
+    90% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(1px, -2px) rotate(-1deg);
+    }
+}
+
+@keyframes shake-violent {
+    0% {
+        transform: translate(2px, 2px) rotate(0deg);
+    }
+
+    10% {
+        transform: translate(-2px, -4px) rotate(-2deg);
+    }
+
+    20% {
+        transform: translate(-6px, 0px) rotate(2deg);
+    }
+
+    30% {
+        transform: translate(6px, 4px) rotate(0deg);
+    }
+
+    40% {
+        transform: translate(2px, -2px) rotate(2deg);
+    }
+
+    50% {
+        transform: translate(-2px, 4px) rotate(-2deg);
+    }
+
+    60% {
+        transform: translate(-6px, 2px) rotate(0deg);
+    }
+
+    70% {
+        transform: translate(6px, 2px) rotate(-2deg);
+    }
+
+    80% {
+        transform: translate(-2px, -2px) rotate(2deg);
+    }
+
+    90% {
+        transform: translate(2px, 4px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(2px, -4px) rotate(-2deg);
+    }
+}
+
+/* Hazard Overlay */
+.hazard-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+    display: none;
+}
+
+.hazard-overlay.active {
+    display: block;
+}
+
+.hazard-light-left,
+.hazard-light-right {
+    position: absolute;
+    top: 50%;
+    width: 40vh;
+    height: 200vh;
+    /* Fill vertical space */
+    background: radial-gradient(ellipse at center, rgba(255, 100, 0, 0.4) 0%, rgba(255, 50, 0, 0.1) 60%, transparent 80%);
+    transform: translateY(-50%);
+    filter: blur(60px);
+    opacity: 0;
+    /* Animation handled by JS for audio sync */
+    /* animation: blink-step 0.78s infinite steps(1); */
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.hazard-light-left {
+    left: -20vh;
+    /* Center horizontally on the left edge */
+}
+
+.hazard-light-right {
+    right: -20vh;
+    /* Center horizontally on the right edge */
+}
+
+/* Hard cut animation for perfect sync */
+@keyframes blink-step {
+
+    0%,
+    50% {
+        opacity: 1;
+    }
+
+    /* ON for first 350ms */
+    50.1%,
+    100% {
+        opacity: 0;
+    }
+
+    /* OFF for second 350ms */
+}
+
+/* Motion Blur Effect */
+/* Motion Blur Effect */
+.motion-blur {
+    filter: blur(1px) contrast(1.1);
+    transform: scale(1.01) translateY(-2px);
+    /* Slight lift to countersink shake */
+    will-change: transform, filter;
+    overflow: visible;
+    /* Ensure we don't clip the top */
+}
+
+/* Responsive */
+@media screen and (max-width: 500px) {
+    .dashboard {
+        width: 100%;
+        border-radius: 20px 20px 0 0;
+        gap: 0.5rem;
+        padding: 0 1rem;
+    }
+
+    .instrument-group.main-gauge {
+        margin-bottom: 30px;
+        /* Lift center gauge more on small screens to fit */
+    }
+
+    .speedometer-dial {
+        width: 100px;
+        height: 100px;
+    }
+
+    .dash-btn {
+        width: 50px;
+        height: 50px;
+    }
+}

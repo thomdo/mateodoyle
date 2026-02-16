@@ -6,6 +6,7 @@ const TEMPLATES_DIR = path.join(__dirname, 'templates');
 const ASSETS_DIR = path.join(__dirname, 'assets');
 const CSS_DIR = path.join(__dirname, 'css');
 const FONTS_DIR = path.join(__dirname, 'fonts');
+const SCRIPTS_DIR = path.join(__dirname, 'scripts');
 
 // Helper to ensure directory exists
 function ensureDir(dir) {
@@ -67,6 +68,9 @@ if (fs.existsSync(CSS_DIR)) {
 }
 if (fs.existsSync(FONTS_DIR)) {
     fs.cpSync(FONTS_DIR, path.join(DIST_DIR, 'fonts'), { recursive: true });
+}
+if (fs.existsSync(SCRIPTS_DIR)) {
+    fs.cpSync(SCRIPTS_DIR, path.join(DIST_DIR, 'js'), { recursive: true });
 }
 
 console.log('Build complete!');
