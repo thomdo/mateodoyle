@@ -19,7 +19,7 @@
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    z-index: 1000;
+    z-index: 2000;
     pointer-events: none;
 }
 
@@ -40,7 +40,7 @@
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: absolute;
     bottom: 20px;
-    z-index: 100;
+    z-index: 1500;
 }
 
 .start-engine-btn:hover {
@@ -80,10 +80,11 @@
     position: relative;
     transform: translateY(100%);
     /* Start hidden below fold */
-    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.5s, box-shadow 0.5s;
     border: 1px solid #444;
     border-bottom: none;
     /* No border on bottom since it bleeds off */
+    z-index: 1500;
 }
 
 .dashboard.active {
@@ -524,4 +525,220 @@
         width: 50px;
         height: 50px;
     }
+}
+
+/* =========================================
+   NIGHT MODE & LIGHTING
+   ========================================= */
+
+/* The Scrim: Multiplies darkness over the world */
+#night-scrim {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+    opacity: 0;
+    /* Controlled by JS */
+    transition: opacity 0.5s ease-out;
+    /* Fast enough for lights, slow enough for sunset steps */
+    display: flex;
+}
+
+/* We use two halves to easily create two distinct headlight holes */
+#night-scrim::before,
+#night-scrim::after {
+    content: '';
+    flex: 1;
+    background: black;
+    /* Default darkness */
+    transition: background 0.2s ease-out, opacity 0.2s ease-out;
+}
+
+/* LOW BEAM: Punch holes in the darkness using radial gradients */
+/* Softened gradients for a more natural "lamp" look */
+#night-scrim.headlights-mask::before {
+    /* Left beam: Moved slightly away from center and softened */
+    background: radial-gradient(circle at 75% 60%, transparent 10%, black 80%);
+}
+
+#night-scrim.headlights-mask::after {
+    /* Right beam: Moved slightly away from center and softened */
+    background: radial-gradient(circle at 25% 60%, transparent 10%, black 80%);
+}
+
+/* HIGH BEAM: "Silly Mode" (Toned Down) */
+body.high-beams main {
+    /* Blow out the contrast and brightness on the content */
+    filter: contrast(1.3) brightness(1.4) saturate(1.2) drop-shadow(0 0 10px rgba(255, 255, 255, 0.4));
+    transition: filter 0.2s ease-out;
+}
+
+/* If High Beams are on, we keep the scrim opacity but expand the holes */
+body.high-beams #night-scrim {
+    opacity: 1 !important;
+    background: transparent !important;
+    /* Let the children handle the masking */
+    mix-blend-mode: multiply;
+}
+
+/* HIGH BEAM MASKS: Same shape as low beam, but wider and brighter */
+body.high-beams #night-scrim::before {
+    /* Left beam: WIDER hole */
+    background: radial-gradient(circle at 75% 60%, transparent 40%, black 90%);
+    opacity: 1;
+}
+
+body.high-beams #night-scrim::after {
+    /* Right beam: WIDER hole */
+    background: radial-gradient(circle at 25% 60%, transparent 40%, black 90%);
+    opacity: 1;
+}
+
+/* Night Illumination for Daisyboard */
+.dashboard.night-illuminated {
+    background: linear-gradient(to bottom, #111, #000);
+    box-shadow: 0 -1px 0 rgba(0, 243, 255, 0.2), 0 0 60px rgba(0, 0, 0, 1);
+    border-color: #222;
+}
+
+/* LED Backlight Effect (Ice Blue) */
+.dashboard.night-illuminated .label,
+.dashboard.night-illuminated .speedometer-text {
+    color: #e0ffff;
+    text-shadow:
+        0 0 5px #00f3ff,
+        0 0 10px #00f3ff,
+        0 0 20px rgba(0, 243, 255, 0.5);
+}
+
+/* Icons Glow */
+.dashboard.night-illuminated .light-icon,
+.dashboard.night-illuminated .hazard-icon {
+    filter: drop-shadow(0 0 4px #00f3ff);
+}
+
+/* Needle Glow (Intense Red) */
+.dashboard.night-illuminated .needle {
+    background: #ff3333;
+    box-shadow:
+        0 0 5px #ff0000,
+        0 0 15px #ff0000,
+        0 0 30px rgba(255, 0, 0, 0.6);
+}
+
+/* Button Ring Glow */
+.dashboard.night-illuminated .dash-btn {
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.1), inset 0 0 15px rgba(0, 0, 0, 0.8);
+    border-color: #333;
+}
+
+/* Light Knob Glow */
+.dashboard.night-illuminated .light-knob-container {
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.1), inset 0 0 15px rgba(0, 0, 0, 0.8);
+    border-color: #444;
+}
+
+/* Markers Backlight */
+.dashboard.night-illuminated .knob-marker {
+    background: #555;
+    box-shadow: 0 0 3px rgba(0, 243, 255, 0.5);
+}
+
+/* Light Switch Styling (Rotary Knob) */
+.light-knob-container {
+    width: 60px;
+    height: 60px;
+    position: relative;
+    cursor: pointer;
+    background: #111;
+    border-radius: 50%;
+    box-shadow:
+        inset 0 0 10px #000,
+        0 1px 0 rgba(255, 255, 255, 0.1);
+    border: 1px solid #333;
+}
+
+.knob-dial {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #333, #111);
+    position: relative;
+    transition: transform 0.2s cubic-bezier(0.4, 2.5, 0.6, 1);
+    /* Snappy bounce */
+    transform: rotate(0deg);
+    /* Default Low */
+    z-index: 2;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* The pointer/notch */
+.knob-pointer {
+    width: 6px;
+    height: 20px;
+    background: #555;
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+    transition: background 0.3s;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Markers around the knob */
+.knob-marker {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #333;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+/* Markers positioning relative to center */
+/* Radius approx 38px? No container is 60px.. so radius ~38px outside */
+.knob-marker.off {
+    transform: translate(-50%, -50%) rotate(-45deg) translateY(-38px);
+}
+
+.knob-marker.low {
+    transform: translate(-50%, -50%) rotate(0deg) translateY(-38px);
+}
+
+.knob-marker.high {
+    transform: translate(-50%, -50%) rotate(45deg) translateY(-38px);
+}
+
+
+/* Active States */
+/* OFF */
+/* Default state, no glow */
+
+/* LOW BEAM (Active) */
+.light-knob-container.active-low .knob-pointer {
+    background: #4cc9f0;
+    /* Cyan */
+    box-shadow: 0 0 5px #4cc9f0;
+}
+
+.light-knob-container.active-low .knob-marker.low {
+    background: #4cc9f0;
+    box-shadow: 0 0 8px #4cc9f0;
+}
+
+/* HIGH BEAM (Active) */
+.light-knob-container.active-high .knob-pointer {
+    background: #4361ee;
+    /* Blue */
+    box-shadow: 0 0 8px #4361ee;
+}
+
+.light-knob-container.active-high .knob-marker.high {
+    background: #4361ee;
+    box-shadow: 0 0 10px #4361ee;
 }

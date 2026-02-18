@@ -10,7 +10,8 @@ class InstrumentPanel {
             hazardsActive: false,
             scrollSpeed: 0,
             lastScrollTop: 0,
-            lastScrollTime: Date.now()
+            lastScrollTime: Date.now(),
+            headlightMode: 1 // 0=OFF, 1=LOW, 2=HIGH
         };
 
         this.elements = {
@@ -20,7 +21,9 @@ class InstrumentPanel {
             speedBar: null,
             hornBtn: null,
             hazardSwitch: null,
-            hazardOverlay: null
+            hazardOverlay: null,
+            lightSwitch: null,
+            nightScrim: null
         };
 
         this.audio = {
@@ -41,6 +44,10 @@ class InstrumentPanel {
         this.cacheElements();
         this.bindEvents();
         this.checkState();
+        this.calculateDarkness();
+
+        // Update darkness every minute
+        setInterval(() => this.calculateDarkness(), 60000);
     }
 
     injectHTML() {
@@ -86,11 +93,25 @@ class InstrumentPanel {
                     <div class="label">HAZARD</div>
                 </div>
 
+                <!-- Lights (Rotary Knob) -->
+                <div class="instrument-group">
+                    <div id="light-switch" class="light-knob-container" role="switch" aria-label="Lights">
+                        <div class="knob-dial">
+                            <div class="knob-pointer"></div>
+                        </div>
+                        <div class="knob-marker off"></div>
+                        <div class="knob-marker low"></div>
+                        <div class="knob-marker high"></div>
+                    </div>
+                    <div class="label">LIGHTS</div>
+                </div>
+
             </div>
             <div id="hazard-overlay" class="hazard-overlay">
                 <div class="hazard-light-left"></div>
                 <div class="hazard-light-right"></div>
             </div>
+            <div id="night-scrim" class="night-scrim"></div>
         `;
         document.body.appendChild(root);
     }
@@ -103,6 +124,8 @@ class InstrumentPanel {
         this.elements.hornBtn = document.getElementById('horn-btn');
         this.elements.hazardSwitch = document.getElementById('hazard-switch');
         this.elements.hazardOverlay = document.getElementById('hazard-overlay');
+        this.elements.lightSwitch = document.getElementById('light-switch');
+        this.elements.nightScrim = document.getElementById('night-scrim');
     }
 
     bindEvents() {
@@ -118,6 +141,9 @@ class InstrumentPanel {
 
         // Hazards
         this.elements.hazardSwitch.addEventListener('click', () => this.toggleHazards());
+
+        // Lights
+        this.elements.lightSwitch.addEventListener('click', () => this.toggleHeadlights());
 
         // Scroll Logic (Speedometer)
         window.addEventListener('scroll', () => this.handleScroll(), { passive: true });
@@ -159,6 +185,121 @@ class InstrumentPanel {
         // Visual feedback
         this.elements.hornBtn.style.transform = 'scale(0.90)';
         setTimeout(() => this.elements.hornBtn.style.transform = '', 100);
+    }
+
+    toggleHeadlights() {
+        this.state.headlightMode = (this.state.headlightMode + 1) % 3;
+        this.updateHeadlightVisuals();
+    }
+
+    updateHeadlightVisuals() {
+        const mode = this.state.headlightMode;
+        // 0=OFF, 1=LOW, 2=HIGH
+
+        // Rotate Knob
+        // 0 (Off) -> -45deg
+        // 1 (Low) -> 0deg
+        // 2 (High) -> +45deg
+        const rotation = (mode - 1) * 45;
+        const knob = this.elements.lightSwitch.querySelector('.knob-dial');
+        if (knob) knob.style.transform = `rotate(${rotation}deg)`;
+
+        // Visual Feedback on Knob
+        this.elements.lightSwitch.classList.toggle('active-low', mode === 1);
+        this.elements.lightSwitch.classList.toggle('active-high', mode === 2);
+
+        // Remove High Beam class
+        document.body.classList.remove('high-beams');
+        this.elements.nightScrim.classList.remove('headlights-mask');
+
+        if (mode === 0) {
+            // OFF: Scrim is just normal darkness
+        } else if (mode === 1) {
+            // LOW: Apply mask to scrim to reveal content
+            this.elements.nightScrim.classList.add('headlights-mask');
+        } else if (mode === 2) {
+            // HIGH: Full brightness, remove scrim (or make transparent), add extreme filters
+            document.body.classList.add('high-beams');
+        }
+    }
+
+    calculateDarkness() {
+        const now = new Date();
+        const hour = now.getHours();
+        const minutes = now.getMinutes();
+        const decimalHour = hour + (minutes / 60);
+
+        // Calculate Moon Phase (0 = New Moon, 0.5 = Full Moon, 1 = New Moon)
+        const moon = this.getMoonPhase(now);
+        // Darkness intensity: New Moon (1.0) -> Pitch Black. Full Moon (0.0) -> Visible.
+        // We remap moon phase (0.5 is bright, 0/1 is dark)
+        // Distance from Full Moon (0.5). 
+        // 0 or 1 -> dist 0.5. 0.5 -> dist 0.
+        // Darkness Factor = 0.5 + (dist * 0.8) -> 0.5 to 0.9.
+        const distFromFull = Math.abs(moon - 0.5);
+        const moonDarkness = 0.4 + (distFromFull * 1.0); // 0.4 (Full) to 0.9 (New)
+
+        // Time Ramp
+        // 6PM (18) -> Start darkening
+        // 8PM (20) -> Max darkness
+        // 6AM (6) -> Start lightening
+        // 8AM (8) -> Full brightness
+
+        let timeOpacity = 0;
+
+        if (decimalHour >= 18 && decimalHour < 20) {
+            // Sunset Ramp (0 -> 1)
+            timeOpacity = (decimalHour - 18) / 2;
+        } else if (decimalHour >= 20 || decimalHour < 6) {
+            // Night (Max opacity)
+            timeOpacity = 1;
+        } else if (decimalHour >= 6 && decimalHour < 8) {
+            // Sunrise Ramp (1 -> 0)
+            timeOpacity = 1 - ((decimalHour - 6) / 2);
+        } else {
+            // Day
+            timeOpacity = 0;
+        }
+
+        // Final opacity = timeOpacity * moonDarkness
+        // ex: Night (1) * New Moon (0.9) = 0.9 opacity.
+        // ex: Night (1) * Full Moon (0.4) = 0.4 opacity.
+        const finalOpacity = timeOpacity * moonDarkness;
+
+        this.elements.nightScrim.style.opacity = finalOpacity;
+
+        // Dashboard Illumination: If it's getting dark, light up the dash
+        if (finalOpacity > 0.2) {
+            this.elements.dashboard.classList.add('night-illuminated');
+        } else {
+            this.elements.dashboard.classList.remove('night-illuminated');
+        }
+
+        // Also ensure headlight visuals are consistent with current mode
+        this.updateHeadlightVisuals();
+    }
+
+    getMoonPhase(date) {
+        // Standard algorithm to get approximate moon age (0..29.53)
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+
+        if (month < 3) {
+            year--;
+            month += 12;
+        }
+
+        ++month;
+        let c = 365.25 * year;
+        let e = 30.6 * month;
+        let jd = c + e + day - 694039.09; // jd is total days elapsed
+        jd /= 29.5305882; // divide by moon cycle
+        let b = parseInt(jd); // integer part
+        jd -= b; // fractional part determines phase
+
+        // 0 = New, 0.5 = Full, 1 = New
+        return jd;
     }
 
     toggleHazards() {
